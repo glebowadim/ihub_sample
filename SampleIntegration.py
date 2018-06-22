@@ -10,11 +10,16 @@ with open('PasswordFile.json', "rb") as PFile:
 user = PasswordData["UserName"]
 password = PasswordData["Password"]
 site = PasswordData["URL"]
-integration = PasswordData["Integration"]
+
+print(os.path.exists('Params.json'))
+with open('Params.json', "rb") as PFile:
+    ParamsData = json.loads(PFile.read().decode('utf-8'))
+
+processId = ParamsData["Process_id"]
 
 i = 0
 while i < 3:
     time.sleep(5)
-    integrationOV = OVIntegration.OVIntegration(integrationName=integration, url=site, userName=user, password=password)
+    integrationOV = OVIntegration.OVIntegration(processId=processId, url=site, userName=user, password=password)
     i = i + 1
     print(i)

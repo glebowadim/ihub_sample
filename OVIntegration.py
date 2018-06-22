@@ -11,34 +11,27 @@ from collections import OrderedDict
 
 class OVIntegration(object):
 
-    def __init__(self, integrationName="", url="", userName="", password=""):
+    def __init__(self, processId="", url="", userName="", password=""):
         self.URL = url
         self.userName = userName
         self.password = password
-        self.integrationName = integrationName
         self.errors = []
         self.request = {}
         self.jsonData = {}
-        self.processId = None
+        self.processId = processId
         self.Parameters = None
         self.urlRun = None
         self.urlLog = None
 
-        if url != None and userName != None and password != None and integrationName != None:
+        if url != None and userName != None and password != None and processId != None:
             self.addLog(logLevel='Info', message='Test1', description='TestD1')
             self.addLog(logLevel='Debug', message='Test2', description='TestD2')
             self.addLog(logLevel='Warning', message='Test3', description='TestD3')
             self.addLog(logLevel='Error', message='Test4', description='TestD4')
 
     def addLog(self, logLevel, message, description):
-        self.urlRun = self.URL + "/api/v3/integrations/runs?integration_name=" + self.integrationName + "&status=Running"
-
-        self.curl = curl('GET', self.urlRun, auth=(self.userName, self.password))
-        self.jsonData = self.curl.jsonData
-        self.processId = self.jsonData[0]['process_id']
-
-        self.Parameters = {'message': message, 'description': description, 'log_level_name': logLevel}
-        self.json = json.dumps(self.Parameters)
+        self.parameters = {'message': message, 'description': description, 'log_level_name': logLevel}
+        self.json = json.dumps(self.parameters)
         self.headers = {'content-type': 'application/json'}
         self.urlLog = self.URL + "/api/v3/integrations/runs/logs/" + str(self.processId) + "/logs"
         self.curl = curl('POST', self.urlLog, data=self.json, headers=self.headers, auth=(self.userName, self.password))
