@@ -1,7 +1,6 @@
 # ihub_sample
 Sample Project for Onevizion Integration Hub
 
-
 Sample Integration adds integration logs via API and writes message to stdout.
 
 Sample Integration consist of two python files, SimpleIntegration.py and OVIntegration.py.
@@ -16,8 +15,8 @@ Sample Integration retrieves Process Id from Params.json file for adding logs. P
 SmallSampleIntegration is just a integration with writing to stdout only.
 
 ## Requirements
-Python 3
-Requests - library for python (http://docs.python-requests.org/en/master/)
+- Python 3
+- Requests - library for python (http://docs.python-requests.org/en/master/)
 
 ## Usage
 Create new integration with the following fields: 
