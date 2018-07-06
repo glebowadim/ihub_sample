@@ -12,7 +12,7 @@ PasswordFile.json should be in integration directory. PasswordFile.json contains
 
 Sample Integration retrieves Process Id from Params.json file for adding logs. Params.json is put into integration directory at each integration run.
 
-SmallSampleIntegration is just a integration with writing to stdout only.
+If you does not have the possibility to add log via API, then you can use SmallSampleIntegration. SmallSampleIntegration is just a integration with writing to stdout only.
 
 ## Requirements
 - Python 3
