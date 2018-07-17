@@ -1,21 +1,16 @@
 import OVIntegration
 import json
-import os
 import time
 
-print(os.path.exists('PasswordFile.json'))
 with open('PasswordFile.json', "rb") as PFile:
-    PasswordData = json.loads(PFile.read().decode('utf-8'))
+    passwordData = json.loads(PFile.read().decode('utf-8'))
 
-user = PasswordData["UserName"]
-password = PasswordData["Password"]
-site = PasswordData["URL"]
+user = passwordData["UserName"]
+password = passwordData["Password"]
+site = passwordData["URL"]
 
-print(os.path.exists('Params.json'))
-with open('Params.json', "rb") as PFile:
-    ParamsData = json.loads(PFile.read().decode('utf-8'))
-
-processId = ParamsData["Process_id"]
+with open('ihub_process_id', "rb") as PFile:
+    processId = PFile.read().decode('utf-8')
 
 i = 0
 while i < 3:

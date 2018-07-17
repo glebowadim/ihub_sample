@@ -8,9 +8,9 @@ OVIntegration.py contains methods for working with API. SampleIntegration.py is 
 
 The integration adds logs of the different log levels (Info, Warning, Error, Debug) every 5 seconds. 
 
-PasswordFile.json should be in integration directory. PasswordFile.json contains login, password, url and integration name. 
+PasswordFile.json should be in integration directory. PasswordFile.json contains login, password and url. 
 
-Sample Integration retrieves Process Id from Params.json file for adding logs. Params.json is put into integration directory at each integration run.
+Sample Integration retrieves Process Id from ihub_process_id file for adding logs. ihub_process_id is put into integration directory at each integration run.
 
 If you does not have the possibility to add log via API, then you can use SmallSampleIntegration. SmallSampleIntegration is just a integration with writing to stdout only.
 
@@ -31,8 +31,7 @@ PasswordFile.json
 {
 "UserName":"amoiseenko",
 "Password":"******",
-"URL":"http://localhost:8080",
-"Integration":"Sample Integration"
+"URL":"http://localhost:8080"
 }
 ```
 
