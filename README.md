@@ -14,6 +14,8 @@ Sample Integration retrieves Process Id from ihub_process_id file for adding log
 
 If you does not have the possibility to add log via API, then you can use SmallSampleIntegration. SmallSampleIntegration is just a integration with writing to stdout only.
 
+Integration uses print(..., flush = True), so the stdout is synchronized with the Integration Logs. Otherwise, messages from stdout are added after the script is completed.
+
 ## Requirements
 - Python 3
 - Requests - library for python (http://docs.python-requests.org/en/master/)
