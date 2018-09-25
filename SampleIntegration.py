@@ -17,4 +17,4 @@ while i < 3:
     time.sleep(5)
     integrationOV = OVIntegration.OVIntegration(processId=processId, url=site, userName=user, password=password)
     i = i + 1
-    print(i)
+    print(i, flush = True)
