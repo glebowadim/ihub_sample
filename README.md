@@ -24,7 +24,7 @@ Integration uses print(..., flush = True), so the stdout is synchronized with th
 Create new integration with the following fields: 
 - Integration Name: Sample Integration
 - Command: python3 ./SampleIntegration.py
-- Repository: https://github.com/IKAMTeam/ihub_sample 
+- Repository: https://github.com/ov-integrations/ihub_sample
 - Settings File:  PasswordFile.json
 
 PasswordFile.json
