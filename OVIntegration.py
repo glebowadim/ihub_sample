@@ -33,7 +33,7 @@ class OVIntegration(object):
         self.parameters = {'message': message, 'description': description, 'log_level_name': logLevel}
         self.json = json.dumps(self.parameters)
         self.headers = {'content-type': 'application/json'}
-        self.urlLog = self.URL + "/api/v3/integrations/runs/logs/" + str(self.processId) + "/logs"
+        self.urlLog = self.URL + "/api/v3/integrations/runs/" + str(self.processId) + "/logs"
         self.curl = curl('POST', self.urlLog, data=self.json, headers=self.headers, auth=(self.userName, self.password))
 
 
