@@ -2,7 +2,7 @@ import OVIntegration
 import json
 import time
 
-with open('PasswordFile.json', "rb") as PFile:
+with open('settings.json', "rb") as PFile:
     passwordData = json.loads(PFile.read().decode('utf-8'))
 
 user = passwordData["UserName"]

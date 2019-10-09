@@ -8,7 +8,7 @@ OVIntegration.py contains methods for working with API. SampleIntegration.py is 
 
 The integration adds logs of the different log levels (Info, Warning, Error, Debug) every 5 seconds. 
 
-PasswordFile.json should be in integration directory. PasswordFile.json contains login, password and url. 
+settings.json should be in integration directory. settings.json contains login, password and url. 
 
 Sample Integration retrieves Process Id from ihub_process_id file for adding logs. ihub_process_id is put into integration directory at each integration run.
 
@@ -25,9 +25,9 @@ Create new integration with the following fields:
 - Integration Name: Sample Integration
 - Command: python3 ./SampleIntegration.py
 - Repository: https://github.com/ov-integrations/ihub_sample
-- Settings File:  PasswordFile.json
+- Settings File: settings.json
 
-PasswordFile.json
+settings.json
 
 ```json
 {
