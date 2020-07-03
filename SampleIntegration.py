@@ -9,8 +9,10 @@ user = passwordData["UserName"]
 password = passwordData["Password"]
 site = passwordData["URL"]
 
-with open('ihub_process_id', "rb") as PFile:
-    processId = PFile.read().decode('utf-8')
+with open('ihub_parameters.json', "rb") as PFile:
+    ihub_data = json.loads(PFile.read().decode('utf-8'))
+
+processId = ihub_data['processId']
 
 i = 0
 while i < 3:
