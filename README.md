@@ -27,6 +27,7 @@ Create new integration with the following fields:
 - Repository: https://github.com/ov-integrations/ihub_sample
 - Settings File: settings.json
 
+
 settings.json
 
 ```json
