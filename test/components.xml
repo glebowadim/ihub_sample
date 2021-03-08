@@ -1,33 +1,49 @@
-<?xml version="1.0" encoding="UTF-8"?><COMPONENTS author="ihub_sample_admin" description="" name="integrations.onevizion.com_BPL_01282021013503.xml" site="https&#x3a;&#x2f;&#x2f;integrations.onevizion.com" ts="" ><RULES>
+<?xml version="1.0" encoding="UTF-8"?><COMPONENTS author="ihub_sample_admin" description="" name="integrations.onevizion.com_BPL_03082021100630.xml" site="https&#x3a;&#x2f;&#x2f;integrations.onevizion.com" ts="" ><RULES>
  <RULES_ITEM>
   <IS_ASYNC>0</IS_ASYNC>
   <IS_ENABLED>1</IS_ENABLED>
   <RULE>TEST_INTEGRATION_IHUB_SAMPLE_RESULTS</RULE>
   <RULE_CLASS_ID>1</RULE_CLASS_ID>
-  <RULE_ID>100006524</RULE_ID>
+  <RULE_ID>100006564</RULE_ID>
   <RULE_TYPE>
-   <RULE_TYPE_ID>101303</RULE_TYPE_ID>
-   <RULE_TYPE>Daily</RULE_TYPE>
-   <REPEAT_INTERVAL>FREQ=DAILY;</REPEAT_INTERVAL>
-   <START_DATE>01/01/2000 05:00:00</START_DATE>
+   <RULE_TYPE_ID>121</RULE_TYPE_ID>
+   <RULE_TYPE>After Integration Complete</RULE_TYPE>
+   <ID_FIELD>INTEGRATION_RUN_ID</ID_FIELD>
+   <TEMPLATE_SQL>select integration_id as &quot;id&quot;, integration_name as &quot;Integration Name&quot;, integration_id as &quot;Integration ID&quot; from integration</TEMPLATE_SQL>
    <TYPE_LABELS>
     <T_LABEL>
      <APP_LANG_ID>0</APP_LANG_ID>
-     <APP_LABEL_ID>-11754</APP_LABEL_ID>
-     <LABEL_TEXT>Daily</LABEL_TEXT>
+     <APP_LABEL_ID>6501</APP_LABEL_ID>
+     <LABEL_TEXT>Integration Complete (After)</LABEL_TEXT>
     </T_LABEL>
     <T_LABEL>
      <APP_LANG_ID>1</APP_LANG_ID>
-     <APP_LABEL_ID>-11754</APP_LABEL_ID>
-     <LABEL_TEXT>Daily</LABEL_TEXT>
+     <APP_LABEL_ID>6501</APP_LABEL_ID>
+     <LABEL_TEXT>Integration Complete (After)</LABEL_TEXT>
     </T_LABEL>
     <T_LABEL>
      <APP_LANG_ID>5</APP_LANG_ID>
-     <APP_LABEL_ID>-11754</APP_LABEL_ID>
-     <LABEL_TEXT>Daily</LABEL_TEXT>
+     <APP_LABEL_ID>6501</APP_LABEL_ID>
+     <LABEL_TEXT>Integration Complete (After)</LABEL_TEXT>
     </T_LABEL>
    </TYPE_LABELS>
-   <DESC_LABELS/>
+   <DESC_LABELS>
+    <T_LABEL>
+     <APP_LANG_ID>0</APP_LANG_ID>
+     <APP_LABEL_ID>6502</APP_LABEL_ID>
+     <LABEL_TEXT>Executed when an Integration is finished</LABEL_TEXT>
+    </T_LABEL>
+    <T_LABEL>
+     <APP_LANG_ID>1</APP_LANG_ID>
+     <APP_LABEL_ID>6502</APP_LABEL_ID>
+     <LABEL_TEXT>Executed when an Integration is finished</LABEL_TEXT>
+    </T_LABEL>
+    <T_LABEL>
+     <APP_LANG_ID>5</APP_LANG_ID>
+     <APP_LABEL_ID>6502</APP_LABEL_ID>
+     <LABEL_TEXT>Executed when an Integration is finished</LABEL_TEXT>
+    </T_LABEL>
+   </DESC_LABELS>
   </RULE_TYPE>
   <SQL_TEXT>declare 
     v_actual_count number;
@@ -35,13 +51,12 @@
     v_integration_read_from_stdout integration.read_from_stdout%type;
     v_integration_log_level integration.log_level%type;
     v_record_numbers number := 3;
-    
-    c_integration_name varchar2(50) := &apos;ihub_sample&apos;;
+    v_integration_name integration.integration_name%type;
 begin    
-    select log_level, read_from_stdout
-      into v_integration_log_level, v_integration_read_from_stdout
+    select log_level, read_from_stdout, integration_name
+      into v_integration_log_level, v_integration_read_from_stdout, v_integration_name
       from integration
-     where integration_name = c_integration_name;
+     where integration_id = :id_num;
      
     if v_integration_log_level = 3 then
         v_record_numbers := 12;
@@ -55,26 +70,19 @@ begin
         v_record_numbers := v_record_numbers + 3;
     end if;
 
-    
-    select max(integration_run_id)
-      into v_integration_run_id
-      from integration_run
-     where integration_id = (select integration_id
-                               from integration
-                              where integration_name = c_integration_name);
     select count(*)
       into v_actual_count
       from integration_log
-     where integration_run_id = v_integration_run_id;
+     where integration_run_id = :integration_run_id;
                             
        
     if v_record_numbers &lt;&gt; v_actual_count then
         pkg_test_integration.test_failed(
-            p_integration_name =&gt; c_integration_name,
+            p_integration_name =&gt; v_integration_name,
             p_error =&gt; &apos;Invalid number of Integration Logs. &apos; || to_char(v_actual_count) || &apos; but expected &apos; ||  to_char(v_record_numbers),
-            p_integration_run_id =&gt; v_integration_run_id);
+            p_integration_run_id =&gt; :integration_run_id);
     else     
-        pkg_test_integration.test_succeed(c_integration_name, v_integration_run_id);
+        pkg_test_integration.test_succeed(v_integration_name, :integration_run_id);
     end if;
        
 end;</SQL_TEXT>
@@ -84,8 +92,8 @@ end;</SQL_TEXT>
   <RULE_HTTPCALL_PARAMS/>
   <BPD_ITEMS>
    <T_BPD_ITEM>
-    <ITEM_ID>10000616052</ITEM_ID>
-    <PKEY>100006524</PKEY>
+    <ITEM_ID>10000616112</ITEM_ID>
+    <PKEY>100006564</PKEY>
     <ITEM_TYPE_ID>9</ITEM_TYPE_ID>
     <ITEM_STATUS_ID>1</ITEM_STATUS_ID>
     <BLOB_DATA/>
@@ -97,12 +105,12 @@ end;</SQL_TEXT>
   <RULE_GEOCODING/>
   <RULE_MAP_SNIPPETS/>
   <PROGRAM_ID>1002397</PROGRAM_ID>
-  <RULE_TYPE_ID>101303</RULE_TYPE_ID>
+  <RULE_TYPE_ID>121</RULE_TYPE_ID>
   <RULE_TOWER_GROUPS/>
   <COMPONENT_PACKAGES>
    <T_BPL_COMP_PKG>
     <COMPONENT_ID>4</COMPONENT_ID>
-    <OBJECT_ID>100006524</OBJECT_ID>
+    <OBJECT_ID>100006564</OBJECT_ID>
     <COMPONENTS_PACKAGE_ID>101263</COMPONENTS_PACKAGE_ID>
     <NAME>IHUB_SAMPLE_TEST</NAME>
     <PROGRAM_ID>1002397</PROGRAM_ID>
