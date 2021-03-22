@@ -1,0 +1,17 @@
+{
+    "type": "object",
+    "properties": {
+        "UserName": {
+            "type": "string",
+            "minLength": 1
+        },
+        "Password": {
+            "type": "string",
+            "minLength": 1
+        },
+        "URL": {
+            "type": "string",
+            "pattern": "^http://.*|^https://.*"
+        }
+    }
+}
