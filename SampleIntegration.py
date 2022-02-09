@@ -1,8 +1,11 @@
-import json
 import time
+import sys
+import subprocess
 
+subprocess.check_call([sys.executable, '-m', 'pip', 'install', '-r', 'python_dependencies.txt'])
+
+import json
 from jsonschema import validate
-
 from ovintegration import OVIntegration
 
 with open('settings_schema.json', "rb") as PFile:
