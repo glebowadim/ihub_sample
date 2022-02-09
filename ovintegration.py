@@ -4,6 +4,7 @@ from onevizion import IntegrationLog, LogLevel
 class OVIntegration:
 
     def __init__(self, process_id: int, url: str, user_name: str, password: str, log_level_name: str):
+        url = url.replace("https://", "").replace("http://", "")
         self.integration_log_service = IntegrationLog(processId=process_id,
                                                       URL=url,
                                                       userName=user_name,
