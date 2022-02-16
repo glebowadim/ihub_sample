@@ -1,15 +1,15 @@
 {
     "type": "object",
     "properties": {
-        "UserName": {
+        "OneVizionUser": {
             "type": "string",
             "minLength": 1
         },
-        "Password": {
+        "OneVizionSecurityToken": {
             "type": "string",
             "minLength": 1
         },
-        "URL": {
+        "OneVizionURL": {
             "type": "string",
             "pattern": "^http://.*|^https://.*"
         }
