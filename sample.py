@@ -12,7 +12,7 @@ class Integration:
         self._integration_log_service = integration_log
 
     def start(self):
-        for i in range(3):
+        for _ in range(3):
             time.sleep(5)
             self._integration_log_service.add(logLevel=LogLevel.INFO, message=TEST_MESSAGE,
                                               description=TEST_DESCRIPTION)
