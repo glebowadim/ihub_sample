@@ -6,6 +6,7 @@ subprocess.check_call([sys.executable, '-m', 'pip', 'install', '-r', 'python_dep
 from sample import Integration
 import json
 from jsonschema import validate
+from onevizion import IntegrationLog
 
 with open('settings_schema.json', "rb") as PFile:
     json_schema = json.loads(PFile.read().decode('utf-8'))
@@ -18,8 +19,8 @@ try:
 except Exception as e:
     raise Exception("Incorrect value in the settings file\n {}".format(str(e))) from e
 
-user = settings_file_json["OneVizionUser"]
-password = settings_file_json["OneVizionSecurityToken"]
+access_key = settings_file_json["OneVizionAccessKey"]
+secret_key = settings_file_json["OneVizionSecretKey"]
 url = settings_file_json["OneVizionURL"]
 
 with open('ihub_parameters.json', "rb") as PFile:
@@ -28,10 +29,12 @@ with open('ihub_parameters.json', "rb") as PFile:
 process_id = ihub_data['processId']
 log_level = ihub_data['logLevel']
 
-integration = Integration(url=url,
-                          user_name=user,
-                          password=password,
-                          process_id=process_id,
-                          log_level_name=log_level)
+integration_log = IntegrationLog(URL=url.replace("https://", "").replace("http://", ""),
+                                 userName=access_key,
+                                 password=secret_key,
+                                 isTokenAuth=True,
+                                 processId=process_id,
+                                 logLevelName=log_level)
 
+integration = Integration(integration_log)
 integration.start()

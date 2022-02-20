@@ -1,11 +1,11 @@
 {
     "type": "object",
     "properties": {
-        "OneVizionUser": {
+        "OneVizionAccessKey": {
             "type": "string",
             "minLength": 1
         },
-        "OneVizionSecurityToken": {
+        "OneVizionSecretKey": {
             "type": "string",
             "minLength": 1
         },
