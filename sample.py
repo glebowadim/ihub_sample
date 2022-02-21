@@ -16,4 +16,3 @@ class Integration:
             time.sleep(5)
             self._integration_log_service.add(logLevel=LogLevel.INFO, message=TEST_MESSAGE,
                                               description=TEST_DESCRIPTION)
-            print(TEST_MESSAGE, flush=True)
