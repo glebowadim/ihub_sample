@@ -1,0 +1,17 @@
+{
+    "type": "object",
+    "properties": {
+        "OneVizionAccessKey": {
+            "type": "string",
+            "minLength": 1
+        },
+        "OneVizionSecretKey": {
+            "type": "string",
+            "minLength": 1
+        },
+        "OneVizionURL": {
+            "type": "string",
+            "pattern": "^http://.*|^https://.*"
+        }
+    }
+}
